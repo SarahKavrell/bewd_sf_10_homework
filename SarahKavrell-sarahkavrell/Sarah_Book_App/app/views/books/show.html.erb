@@ -1,0 +1,43 @@
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @book.author %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @book.genre %>
+</p>
+
+<h2>Comments</h2>
+<% @book.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+
+  <p>
+  <%= link_to 'Destroy Comment', [comment.book, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>
+
+<%= link_to 'Back to Library', books_path %>
