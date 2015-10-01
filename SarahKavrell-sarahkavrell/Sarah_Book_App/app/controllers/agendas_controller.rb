@@ -2,12 +2,15 @@ class AgendasController < ApplicationController
 
 def create
   @book = Book.find(params[:book_id])
-  @question = Book.find(params[:book_id])
-  redirect_to book_path(@book)
+  @question = @book.agendas.create(agenda_params)
+  if @question.save
+    redirect_to book_path(@book)
+  else
+    render 'new'
+  end
 end
-
 private
     def agenda_params
-      params.require(:question).permit(:question)
+      params.require(:agenda).permit(:question)
     end
 end
